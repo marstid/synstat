@@ -1,4 +1,4 @@
-module github.com/marsti/synstat
+module github.com/marstid/synstat
 
 go 1.23
 

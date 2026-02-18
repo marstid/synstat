@@ -5,13 +5,13 @@ A terminal dashboard for monitoring your Synthetic API usage.
 ## Installation
 
 ```bash
-go install github.com/marsti/synstat@latest
+go install github.com/marstid/synstat@latest
 ```
 
 Or run directly:
 
 ```bash
-go run github.com/marsti/synstat@latest
+go run github.com/marstid/synstat@latest
 ```
 
 ## Usage
