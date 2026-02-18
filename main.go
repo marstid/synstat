@@ -651,12 +651,33 @@ func (m model) renderQuotaRow(icon, title string, used, limit float64, renewsAt 
 }
 
 func (m model) renderFooter() string {
-	content := lipgloss.JoinHorizontal(
+	var updateStr string
+	if m.lastUpdate.IsZero() {
+		updateStr = "Never"
+	} else {
+		updateStr = m.lastUpdate.Format("15:04:05")
+	}
+
+	// Top row: Theme and controls
+	topRow := lipgloss.JoinHorizontal(
 		lipgloss.Left,
 		m.styles.Help.Render("Theme: "),
 		m.styles.Help.Render(m.theme.Name),
-		lipgloss.NewStyle().Width(m.width-lipgloss.Width("Theme: ")-lipgloss.Width(m.theme.Name)-lipgloss.Width(" [←/→] Theme  [r] Refresh  [q] Quit")-12).Render(""),
+		lipgloss.NewStyle().Width(m.width-lipgloss.Width("Theme: ")-lipgloss.Width(m.theme.Name)-lipgloss.Width(" [←/→] Theme  [r] Refresh  [q] Quit")-10).Render(""),
 		m.styles.Help.Render("[←/→] Theme  [r] Refresh  [q] Quit"),
+	)
+
+	// Bottom row: Timestamp aligned to left
+	updateLabel := "Last update: "
+	bottomRow := lipgloss.NewStyle().
+		Width(m.width - 4).
+		Align(lipgloss.Left).
+		Render(m.styles.Help.Render(updateLabel + updateStr))
+
+	content := lipgloss.JoinVertical(
+		lipgloss.Left,
+		topRow,
+		bottomRow,
 	)
 
 	return m.styles.Footer.Render(content)
