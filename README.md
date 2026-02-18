@@ -6,6 +6,7 @@ A terminal dashboard for monitoring your Synthetic API usage.
 
 ```bash
 go install github.com/marstid/synstat@latest
+sysnstat
 ```
 
 Or run directly:
@@ -20,7 +21,7 @@ Set your Synthetic API key as an environment variable:
 
 ```bash
 export SYNTHETIC_API_KEY="your-api-key"
-synstat
+go run github.com/marstid/synstat@latest
 ```
 
 ### Configuration
